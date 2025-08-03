@@ -1,12 +1,15 @@
 require('dotenv').config()
 
 const express = require('express')
+const cors = require('cors')
 const { sequelize, Room } = require('./models')
 const authRoutes = require('./routes/auth')
 const bookingRoutes = require('./routes/booking')
 const roomRoutes = require('./routes/room')
 
 const app = express()
+app.use(cors())
+app.use(express.urlencoded({ extended: true })) // Parse URL-encoded bodies
 app.use(express.json())
 
 app.use('/api/auth', authRoutes)
