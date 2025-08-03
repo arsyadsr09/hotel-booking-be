@@ -108,7 +108,7 @@ router.get('/:bookingId', auth, async (req, res) => {
 		res.status(500).json({
 			data: null,
 			status: 'error',
-			message: 'Server error'
+			message: 'Server error',
 		})
 	}
 })

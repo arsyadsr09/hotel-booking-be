@@ -1,10 +1,10 @@
 {
 	"name": "hotel-booking-api",
 	"version": "1.0.0",
-	"main": "app.js",
+	"main": "index.js",
 	"scripts": {
-		"start": "node ./api/index.js",
-		"dev": "nodemon ./api/index.js"
+		"start": "node index",
+		"dev": "nodemon index"
 	},
 	"dependencies": {
 		"bcryptjs": "^2.4.3",

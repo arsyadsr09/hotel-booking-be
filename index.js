@@ -1,7 +1,6 @@
 require('dotenv').config()
 
 const express = require('express')
-const serverless = require('serverless-http')
 const { sequelize, Room } = require('./models')
 const authRoutes = require('./routes/auth')
 const bookingRoutes = require('./routes/booking')
@@ -18,7 +17,10 @@ app.get('/api', (req, res) => {
 	res.send('Hotel Booking API')
 })
 
-module.exports.handler = serverless(app)
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+	console.log(`Server is running on port ${PORT}`);
+});
 
 // sequelize.sync({ force: true }).then(async () => {
 // 	// Sample rooms -> Enable when needed
