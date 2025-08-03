@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 		})
 
 		res.json({
-			data: rooms,
+			data: rooms || [],
 			status: 'success',
 			message: 'Rooms retrieved successfully',
 		})

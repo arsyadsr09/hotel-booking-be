@@ -7,15 +7,15 @@ const router = express.Router()
 const jwtSecret = process.env.JWT_SECRET
 
 router.post('/register', async (req, res) => {
-	const { name, email, password } = req.body
+	const { firstName, lastName, email, password } = req.body
 	const hash = await bcrypt.hash(password, 10)
 	try {
-		const user = await User.create({ name, email, password: hash })
-
-		const token = jwt.sign({ data: userData }, jwtSecret, { expiresIn: '24h' })
+		const user = await User.create({ firstName, lastName, email, password: hash })
 
 		const userData = user.toJSON()
 		delete userData.password
+
+		const token = jwt.sign({ data: userData }, jwtSecret, { expiresIn: '24h' })
 
 		res.json({
 			data: { user: userData, token },
@@ -42,10 +42,10 @@ router.post('/login', async (req, res) => {
 	const isMatch = await bcrypt.compare(password, user.password)
 	if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' })
 
-	const token = jwt.sign({ data: userData }, jwtSecret, { expiresIn: '24h' })
-
 	const userData = user.toJSON()
 	delete userData.password
+
+	const token = jwt.sign({ data: userData }, jwtSecret, { expiresIn: '24h' })
 
 	res.json({
 		data: { user: userData, token },
