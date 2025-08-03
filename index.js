@@ -17,6 +17,11 @@ app.get('/api', (req, res) => {
 	res.send('Hotel Booking API')
 })
 
+app.use((err, req, res, next) => {
+	console.error('Unhandled error:', err) // 👈 logs to Vercel
+	res.status(500).json({ error: 'Internal server error' })
+})
+
 // const PORT = process.env.PORT || 3000
 // app.listen(PORT, () => {
 // 	console.log(`Server is running on port ${PORT}`)
