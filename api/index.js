@@ -1,10 +1,11 @@
 require('dotenv').config()
 
 const express = require('express')
-const { sequelize, Room } = require('./models')
-const authRoutes = require('./routes/auth')
-const bookingRoutes = require('./routes/booking')
-const roomRoutes = require('./routes/room')
+const serverless = require('serverless-http')
+const { sequelize, Room } = require('../models')
+const authRoutes = require('../routes/auth')
+const bookingRoutes = require('../routes/booking')
+const roomRoutes = require('../routes/room')
 
 const app = express()
 app.use(express.json())
@@ -13,7 +14,11 @@ app.use('/api/auth', authRoutes)
 app.use('/api/rooms', roomRoutes)
 app.use('/api/bookings', bookingRoutes)
 
-app.get('/', (req, res) => res.send('Hotel Booking API'))
+app.get('/api', (req, res) => {
+	res.send('Hotel Booking API')
+})
+
+module.exports.handler = serverless(app)
 
 // sequelize.sync({ force: true }).then(async () => {
 // 	// Sample rooms -> Enable when needed
@@ -63,6 +68,4 @@ app.get('/', (req, res) => res.send('Hotel Booking API'))
 // 			afterTax: 1450,
 // 		},
 // 	])
-
-app.listen(3000, () => console.log('Server started on port 3000'))
 // })
