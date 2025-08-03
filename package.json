@@ -16,5 +16,18 @@
 	},
 	"devDependencies": {
 		"nodemon": "^3.0.2"
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/arsyadsr09/hotel-booking-be.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"bugs": {
+		"url": "https://github.com/arsyadsr09/hotel-booking-be/issues"
+	},
+	"homepage": "https://github.com/arsyadsr09/hotel-booking-be#readme",
+	"description": ""
 }
