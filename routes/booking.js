@@ -8,7 +8,7 @@ const router = express.Router()
 // Create booking
 router.post('/', auth, async (req, res) => {
 	try {
-		const { roomId, checkIn, checkOut, totalGuest } = req.body
+		const { roomId, checkIn, checkOut, totalGuest, guestName, guestEmail, guestPhone } = req.body
 
 		const room = await Room.findByPk(roomId)
 		if (!room) return res.status(404).json({ error: 'Room not found' })
@@ -30,6 +30,9 @@ router.post('/', auth, async (req, res) => {
 			totalGuest,
 			subTotal,
 			grandTotal,
+			guestName,
+			guestEmail,
+			guestPhone,
 			status: 'UPCOMING',
 		})
 
@@ -49,8 +52,18 @@ router.post('/', auth, async (req, res) => {
 
 router.get('/', auth, async (req, res) => {
 	try {
+		const { status } = req.query
+
+		const whereCondition = {
+			UserId: req.user.id,
+		}
+
+		if (status) {
+			whereCondition.status = status.toUpperCase()
+		}
+
 		const bookings = await Booking.findAll({
-			where: { UserId: req.user.id },
+			where: whereCondition,
 			include: [
 				{
 					model: Room,

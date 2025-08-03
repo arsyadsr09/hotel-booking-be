@@ -11,6 +11,9 @@ const Booking = sequelize.define('Booking', {
 	totalGuest: DataTypes.INTEGER,
 	subTotal: DataTypes.FLOAT,
 	grandTotal: DataTypes.FLOAT,
+	guestName: DataTypes.STRING,
+	guestEmail: DataTypes.STRING,
+	guestPhone: DataTypes.STRING,
 	status: {
 		type: DataTypes.ENUM('UPCOMING', 'FINISH', 'CANCEL'),
 		defaultValue: 'UPCOMING',
